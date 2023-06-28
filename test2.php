@@ -725,7 +725,7 @@ function MenuEmpresa(){
                 $objEmpresa = new empresa();
                     echo "Ingrese el id de la empresa: \n";
                     $bool = true;
-                   while ($bool) {
+                    while ($bool) {
                     $idE = trim(fgets(STDIN));
                     
                     if($objEmpresa->BuscarEmpresa($idE)){
