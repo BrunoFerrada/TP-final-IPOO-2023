@@ -376,22 +376,7 @@ function MenuViaje(){
             case '5': //Opcion Para crear un viaje
                 
                 $objViaje = new viaje();
-                     echo "Ingrese el id del viaje: \n";
-                    $idV = trim(fgets(STDIN));
-                    $bool= true;
-                   while ($bool) {
 
-                    if($objViaje->BuscarViaje($idV)){
-                        echo "El id ya existe\n";
-                        echo "Ingrese otro\n";
-                        $idV = trim(fgets(STDIN));
-                    }else{
-                        $objViaje->setIdviaje($idV);
-                        $bool = false;                     
-                    } 
-                   
-                   }
-                   
                     echo "Ingrese el destino: \n";
                     $destino = trim(fgets(STDIN));                   
                    
@@ -723,22 +708,23 @@ function MenuEmpresa(){
                 //cargar empresa
                 $bool = true;
                 $objEmpresa = new empresa();
-                    echo "Ingrese el id de la empresa: \n";
-                    $bool = true;
-                    while ($bool) {
-                    $idE = trim(fgets(STDIN));
-                    
-                    if($objEmpresa->BuscarEmpresa($idE)){
-                        echo "El id ya esta utilizado.\n";
-                    }else{                       
-                        $objEmpresa->setIdempresa($idE);
-                        $bool = false;
-                    }
-                   }
                
                 echo "Ingrese el nombre de la empresa: \n";
                 $nombre = trim(fgets(STDIN));
+                
                 $colEmpresa=$objEmpresa->listarEmpresa();
+                if ($colEmpresa == null) {
+                    
+                    $oriDireccion = readline("Ingrese nueva dirección: ");
+                    $empresa = new Empresa();
+                    $empresa->cargarEmpresa(1, $nombre, $oriDireccion);
+                    $inserto = $empresa->insertarEmpresa();
+                    if (!$inserto) {
+                        echo 'no se pudo realizar'."\n";
+                    }else {
+                        echo 'se inserto con exito'."\n";
+                    }
+                } else {
                 $i=0;
                 $bool=true;
                 while ($bool) {
@@ -749,22 +735,19 @@ function MenuEmpresa(){
                         $bool = false;
 
                     }
-                    $i++;            
-                      
+                    $i++;        
                 }
-                
-              
-               
-                echo "Ingrese la dirección de la empresa: \n";
-                $direccion = trim(fgets(STDIN));
-                $objEmpresa->setDireccion($direccion);
-                if($objEmpresa->InsertarEmpresa()){
-                    echo "Se ingreso Correctamente.\n";
-                }else{
-                    echo "La empresa no se ha podido insertar.\n";
-                   
+            
+                $oriDireccion = readline("Ingrese nueva dirección: ");
+                $empresa = new Empresa();
+                $empresa->cargarEmpresa(1, $nombre, $oriDireccion);
+                $inserto = $empresa->insertarEmpresa();
+                if (!$inserto) {
+                    echo 'no se pudo realizar'."\n";
+                }else {
+                    echo 'se inserto con exito'."\n";
                 }
-                
+                }   
                 break;
             
                 case '6':
