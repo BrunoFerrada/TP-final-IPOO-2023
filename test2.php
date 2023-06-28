@@ -6,16 +6,6 @@ include('empresa.php');
 include('pasajero.php');
 include('viaje.php');
 
-/*$empresa = new Empresa();
-$empresa->cargarEmpresa(1, "brunoCorp", "islas Malvinas 1041");
-$empresa->insertarEmpresa();
-$encargado = new ResponsableV();
-$encargado->cargarResponsable(10,15,"bruno","ferrada");
-$encargado->insertarResponsable();
-$viaje = new Viaje();
-$viaje->cargarViaje(1, "arg", 5, $empresa, $encargado, 1000, []);
-$viaje->insertarViaje();*/
-
 function Menu(){
 
     echo "Menu general.
